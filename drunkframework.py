@@ -19,19 +19,17 @@ Version 1.0.0
 
 '''
 
+import random
+
 class Drunk():
-    def __init__(self, env, drunks, x=None, y=None):
+    def __init__(self, env, drunks, PubExit, x=None, y=None):
         self.environment = env
         #Make Agent aware of the other agents
         self.drunks = drunks
         self._envWidth = len(env) 
         self._envHeight = len(env[0])
-        #coordinates for the pub exit
-        #could search for 1s in file using find function?
-        #if element is = to 1 append x and y values to pub
-        self._x = 139
-        self._y = 278
-    
+        self._x = PubExit[0]
+        self._y = PubExit[1]
     def move(self):
         """
         Movement of agent within the environment.
