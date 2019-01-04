@@ -41,14 +41,14 @@ import matplotlib.backends.backend_tkagg
 import drunkframework
 #imports raster data from csv file
 import csv
-import numpy as np
+import math
 
 ###############################################################################
 ####################'''Step 1: Assign value to variables'''####################
 ###############################################################################
 
 num_of_drunks = 25
-PubID = 1
+pubID = 1
 
 ###############################################################################
 #######################'''Step 2: Import environment'''########################
@@ -78,6 +78,8 @@ f.close()
 #test to see environment alone
 plot.imshow(env)
 plot.show()
+plot.imshow(env, cmap=plot.cm.get_cmap('Blues', 251))
+plot.colorbar()
 
 ###############################################################################
 ##########################'''Step 4: Plot agents'''############################
@@ -85,25 +87,36 @@ plot.show()
 
 # set up container for agents
 
-PubCoordsList = []
+pubCoordsList = []
 drunks = []
 
 #Determine where pub is in the environment
-def ExitFinder(PubID):
+def CoordsFinder(pubID):
+    """
+    Finds the coordinates for the exit of a building. 
+    Input ID of building.
+    Outputs x,y coordinates of exit of building within the environment.
+    """
     for i in range(0,len(env)):
         for j in range(0,len(env[0])):
-            if env[i][j] == PubID:
-                PubCoordsList.append([i,j])
+            if env[i][j] == pubID: pubCoordsList.append([i,j])
     #Pub exit is in middle of bottom row of pub
-    PubExit = PubCoordsList[9] 
+    #pubExit = pubCoordsList[9] 
+    '''
+    Assuming the building is square, this finds the width of the building by
+    finding the square root of the length of the pubCoordsList, and dividing by
+    two to find the middle point. 
+    '''
+    pubExit = pubCoordsList[int(math.sqrt((float(len(pubCoordsList))))/2)] 
+    return pubExit;
 
-            
-# for loop to append x and y classes, read in above, to each agent
+#PubExit
+pubExit = CoordsFinder(pubID)
+
+#for loop to append environment, drunks and 
 for i in range(num_of_drunks):
-    drunks.append(drunkframework.Drunk(env, drunks, PubExit))
-    #n.b. to run model with random coordinates, instead of scraping from 
-    # webpage, remove 3rd and 4th arguements above i.e. x, y
-    
+    drunks.append(drunkframework.Drunk(env, drunks, pubExit))
+
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
@@ -128,7 +141,7 @@ def update(frame_number):
     #for each agent - move, eat, share with neighbours and vomit 
     for i in range(num_of_drunks):
         #agents randomly move around environment
-        drunks[i].move()
+        drunks[i].stumble()
 
         #for loop to plot all agents generated
         
@@ -149,7 +162,7 @@ def gen_function(b = [0]):
     """A stopping function for the animation"""
     a = 0
     global carry_on
-    while (a < 100) & (carry_on):
+    while (a < 500) & (carry_on):
         #function returns generator
         yield a			
         a = a + 1
@@ -164,7 +177,7 @@ def run():
     global animation
     animation = ani.FuncAnimation(fig, update, 
                 frames=gen_function, repeat=False)
-    canvas.show()
+    canvas.draw()
     
 ###############################################################################
 #########################'''Step 6: GUI Interface'''###########################
