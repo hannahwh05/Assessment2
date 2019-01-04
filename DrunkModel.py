@@ -29,18 +29,19 @@ Use drunkframework.py for drunk class
 
 #2D plotting library
 import matplotlib
-import matplotlib.pyplot as plot
-#animate plot
-import matplotlib.animation as ani
 #framework to build tkinter graphics interface
 import tkinter
 matplotlib.use('TkAgg')
+import matplotlib.pyplot as plot
+#animate plot
+import matplotlib.animation as ani
 #tkinter backend
 import matplotlib.backends.backend_tkagg
 #imports agent from separate coded file to prevent repetition
 import drunkframework
 #imports raster data from csv file
 import csv
+import numpy as np
 import math
 
 ###############################################################################
@@ -133,11 +134,29 @@ def update(frame_number):
     fig.clear()
     #create global variable to modify local variable outside of function
     global carry_on
+    '''
+    # define the colormap
+    cmap = plot.cm.jet
+    # extract all colors from the .jet map
+    cmaplist = [cmap(i) for i in range(cmap.N)]
+    # force the first color entry to be grey
+    cmaplist[0] = (.5,.5,.5,1.0)
+    # create the new map
+    cmap = cmap.from_list('Custom cmap', cmaplist, cmap.N)
     
+    # define the bins and normalize
+    bounds = np.linspace(0,20,21)
+    norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
+    '''
     #make plot based on size of environment
     plot.xlim(0, len(env))
     plot.ylim(0, len(env[0]))
-
+    plot.imshow(env, cmap=plot.cm.get_cmap('Blues'))
+    plot.colorbar()
+    
+    for i in range(num_of_drunks):
+        plot.scatter(drunks[i]._x, drunks[i]._y)
+        
     #for each agent - move, eat, share with neighbours and vomit 
     for i in range(num_of_drunks):
         #agents randomly move around environment
@@ -145,13 +164,7 @@ def update(frame_number):
 
         #for loop to plot all agents generated
         
-    #plot environment and set minimum and maximum limits based on environment
-    # values to prevent scaling of colour when model runs
-    plot.imshow(env, cmap=plot.cm.get_cmap('Blues', 300))
-    plot.colorbar()
-    
-    for i in range(num_of_drunks):
-        plot.scatter(drunks[i]._x, drunks[i]._y)
+
   
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
@@ -167,7 +180,7 @@ def gen_function(b = [0]):
         yield a			
         a = a + 1
     print("stopping condition")
-    
+   
 ###############################################################################
 #########################'''Step 5: Run the model'''###########################
 ############################################################################### 
