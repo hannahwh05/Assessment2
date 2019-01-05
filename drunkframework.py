@@ -22,7 +22,8 @@ Version 1.0.0
 import random
 
 class Drunk():
-    def __init__(self, env, drunks, houseno, pubDoor, x=None, y=None):
+    def __init__(self, env, drunks, houseno, pubDoor, houseCoords, x=None, 
+                 y=None):
         self.env = env
         #Make Drunk aware of the other agents
         self.drunks = drunks
@@ -31,7 +32,7 @@ class Drunk():
         self._x = pubDoor[0]
         self._y = pubDoor[1]
         self.houseno = houseno
-        self.houseCoords
+        self.houseCoords = houseCoords
         
     def stumble(self):
         """
@@ -59,7 +60,7 @@ class Drunk():
             self._x = 0
         if self._y < 0:
             self._y = 0
-        if self._x > self.envWidth :
+        if self._x > self.envWidth:
             self._x = self.envWidth
         if self._y > self.envHeight:
             self._y = self.envHeight            

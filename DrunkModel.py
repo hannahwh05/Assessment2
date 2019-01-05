@@ -153,7 +153,8 @@ for i in housenoList:
 
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
-    drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor))
+    drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
+                                       houseCoordsList[i]))
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
