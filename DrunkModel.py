@@ -98,6 +98,11 @@ for row2 in reader:
 #Close the reader    				
 f.close()
 
+
+#plot.imshow(env)
+#plot.imshow(re, plot.cm.get_cmap('Blues'))
+
+
 ###############################################################################
 ##########################'''Step 4: Plot agents'''############################
 ###############################################################################
@@ -176,8 +181,10 @@ def update(frame_number):
     #make plot based on size of environment
     plot.xlim(0, len(env))
     plot.ylim(len(env[0]), 0)
-    plot.imshow(env, cmap=plot.cm.get_cmap('Blues'))
+    plot.imshow(env, plot.cm.get_cmap('Blues'))
     plot.colorbar()
+    #overlay route_environ on top of environment
+    #plot.imshow(re, plot.cm.get_cmap('Blues'))
     
     for i in range(num_of_drunks):
         plot.scatter(drunks[i]._x, drunks[i]._y)
@@ -186,10 +193,23 @@ def update(frame_number):
     for i in range(num_of_drunks):
         #agents randomly move around environment
         drunks[i].stumble()
+        #drunks[i].boundary()
 
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
+'''
+for i in range (num_of_drunks):
+    while drunks[i].home == False:
+        drunks[i].stumble()
+        route_environ[agents[i]._y][agents[i]._x]+=1
+        # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
+        if agents[i].environment[agents[i]._y][agents[i]._x]==agents[i].housenum: # If the agent's location is the same as their house number
+            agents[i].arrived_home=True
+            print ("What a journey!! WHERE'S MY BED!")
+'''
+
+
 '''
 # generator function to set condition for when to stop 
 def gen_function(b = [0]):
