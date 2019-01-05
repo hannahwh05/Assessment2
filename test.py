@@ -101,6 +101,7 @@ f.close()
 ###############################################################################
 ##########################'''Step 4: Plot agents'''############################
 ###############################################################################
+
 # set up container for agents
 
 drunks = []
@@ -108,6 +109,8 @@ ID = []
 housenoList = []
 houseCoordsList = []
 pubDoor = []
+
+
 
 #Determine where pub is in the environment
 def coordsFinder(ID):
@@ -118,14 +121,11 @@ def coordsFinder(ID):
     """
    
     coordsList = []
-    #for every row in the .txt file
     for i in range(0,len(env)):
-        #for every column in the .txt file
         for j in range(0,len(env[0])):
-            #if the value at coordinate [i][j] is equal to ID given
             if env[i][j] == ID: 
                 coordsList.append([i,j])
-    #Door is in middle of top row of square
+    #Door is in middle of top row of pub
     #pubExit = pubCoordsList[9] 
     '''
     Assuming the building is square, this finds the width of the building by
@@ -143,17 +143,18 @@ pubDoor = coordsFinder(1)
 for j in range(num_of_drunks):
     houseno = (j+1)*10
     housenoList.append(houseno)
-    #print(houseno) # test to see drunks assigned number    
+    print(houseno) # test to see drunks assigned number    
 
+    
 for i in housenoList:
     houseCoordsList.append(coordsFinder(i))
     
-#print(houseCoordsList) # test to see if houseCoordsList has appended the
-                        # correct coordinates
+print(houseCoordsList)
 
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
-    drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor))
+    drunks.append(drunkframework.Drunk(env, drunks, houseno, pubDoor))
+
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
