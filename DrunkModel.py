@@ -98,8 +98,7 @@ for row2 in reader:
 #Close the reader    				
 f.close()
 
-
-#plot.imshow(env)
+#test to see route_environ
 #plot.imshow(re, plot.cm.get_cmap('Blues'))
 
 
@@ -198,16 +197,16 @@ def update(frame_number):
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
-'''
+
 for i in range (num_of_drunks):
     while drunks[i].home == False:
         drunks[i].stumble()
-        route_environ[agents[i]._y][agents[i]._x]+=1
+        re[drunks[i]._y][drunks[i]._x]=0
         # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if agents[i].environment[agents[i]._y][agents[i]._x]==agents[i].housenum: # If the agent's location is the same as their house number
-            agents[i].arrived_home=True
-            print ("What a journey!! WHERE'S MY BED!")
-'''
+        if drunks[i].env[drunks[i]._y][drunks[i]._x] == drunks[i].houseno: # If the agent's location is the same as their house number
+            drunks[i].home = True
+            print ("Finally I'm back! Off to bed!")
+
 
 
 '''
