@@ -155,20 +155,14 @@ for i in housenoList:
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
 
-def home_distance(houseCoordsList, pubDoor):
-    """
-    Returns the distance between the drunk's house and their starting
-    point at the pub door, using Pythagoras' theorum.
-    """
-    return ((((houseCoordsList[0] - pubDoor[0])**2) + 
-             ((houseCoordsList[1] - pubDoor[1])**2))**0.5)
+
     
-distList = []
-
-for i in range(num_of_drunks):
-    distList.append(home_distance)    
-
-print(distList)
+#distList = []
+#
+#for i in range(num_of_drunks):
+#    distList.append(home_distance(houseCoordsList[i], pubDoor))    
+#
+#print(distList)
 
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):

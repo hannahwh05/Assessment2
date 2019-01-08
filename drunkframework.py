@@ -37,20 +37,30 @@ class Drunk():
         self.houseno = houseno
         self.houseCoords = houseCoords
         self.home = False
-      
+    
+    def home_distance(self, houseCoords, X, Y):
+        """
+        Returns the distance between the drunk's house and their starting
+        point at the pub door, using Pythagoras' theorum.
+        """
+        return ((((houseCoords[0] - X)**2) + 
+                 ((houseCoords[1] - Y)**2))**0.5)
+        
     def stumble(self):
         #x coordinate of drunk plus a number
         moveR = self._x + unitsMoveBy
         moveL = self._x - unitsMoveBy
         #furthest extent of environment on x axis i.e. far right
         wallX = self._envWidth
-
+        currDist = self.home_distance(self.houseCoords, self._x, self._y)
+        moveRDist = self.home_distance(self.houseCoords, moveR, self._y)
+        moveLDist = self.home_distance(self.houseCoords, moveL, self._y)
         #move along x axis i.e. right or left
         #if random number produced (between 0 and 1) is less than 0.5
         if random.random() < 0.5:
             #and if value of the environment at the location of the drunk 
             #plus a number on the x axis is equal to 0 or house location
-            if (self.env[moveR][self._y] == 0 or 
+            if (self.env[moveR][self._y] == 0 and moveRDist <= currDist or 
                 self.env[moveR][self._y] == self.houseCoords):
                 #and within the environment boundary (i.e. if moveR is greater 
                 #than or equal to zero and less than or equal to the width of 
@@ -61,7 +71,7 @@ class Drunk():
         #if conditions are not met above then
         #if value of the environment at the location of the drunk 
         #minus a number on the x axis is equal to 0 or house location
-        elif (self.env[moveL][self._y] == 0 or 
+        elif (self.env[moveL][self._y] == 0 and moveLDist <= currDist or 
               self.env[moveL][self._y] == self.houseCoords):
             #and if within environment boundary
             if moveL >=0 and moveL <= wallX:
@@ -74,13 +84,14 @@ class Drunk():
         moveDown = self._y - unitsMoveBy
         #furthest extent of environment on y axis i.e. top
         wallY = self._envHeight
-
+        moveUpDist = self.home_distance(self.houseCoords, self._x, moveUp)
+        moveDownDist = self.home_distance(self.houseCoords, self._x, moveDown)
         #move along y axis i.e. up or down
         #if random number produced (between 0 and 1) is less than 0.5
         if random.random() < 0.5:
             #and if value of the environment at the location of the drunk 
             #plus a number on the y axis is equal to 0 or house location
-            if (self.env[self._x][moveUp] == 0 or 
+            if (self.env[self._x][moveUp] == 0 and moveUpDist <= currDist or 
                 self.env[self._x][moveUp] == self.houseCoords):
                 #and if within environment boundary (i.e. if moveUp is greater 
                 #than or equal to zero and less than or equal to the height of 
@@ -91,7 +102,7 @@ class Drunk():
         #if conditions are not met above then
         #if value of the environment at the location of the drunk 
         #minus a number on y axis is equal to 0 or house location
-        elif (self.env[self._x][moveDown] == 0 or 
+        elif (self.env[self._x][moveDown] == 0 and moveDownDist <= currDist or 
               self.env[self._x][moveDown] == self.houseCoords):
             #and if within environment boundary
             if moveDown >=0 and moveDown <= wallY:
@@ -102,6 +113,9 @@ class Drunk():
         if self.env == self.houseCoords:
             self.home = True
             
+
+
+
 
     '''
     def stumble(self):
