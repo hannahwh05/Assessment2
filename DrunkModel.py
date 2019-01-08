@@ -155,18 +155,16 @@ for i in housenoList:
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
 
-def home_distance(self):
-        """
-        Returns the distance between the drunk's house and their starting
-        point at the pub door, using Pythagoras theorum.
-        """
-        return (((self.housecoords[0] - pubDoor[0])**2) +
-                ((self.housecoords[1] - pubDoor[1])**2))**0.5
+def home(self):
+    if self.env == self.houseCoords:
+        self.home = True
+
+
 
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
-                                       houseCoordsList[i]))
+                                       houseCoordsList[i], home))
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
@@ -205,9 +203,12 @@ def update(frame_number):
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
+
+for i in range(num_of_drunks):
+    if drunks[i].home == True:
+        print(i, " : Finally I'm back! Off to bed!")
+        
 '''
-
-
 for i in range (num_of_drunks):
     while drunks[i].home == False:
         drunks[i].stumble()
