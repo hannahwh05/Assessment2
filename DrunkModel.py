@@ -155,6 +155,14 @@ for i in housenoList:
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
 
+def home_distance(self):
+        """
+        Returns the distance between the drunk's house and their starting
+        point at the pub door, using Pythagoras theorum.
+        """
+        return (((self.housecoords[0] - pubDoor[0])**2) +
+                ((self.housecoords[1] - pubDoor[1])**2))**0.5
+
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
@@ -164,7 +172,7 @@ for i in range(num_of_drunks):
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
-carry_on = True
+
 
 def update(frame_number):
     """
@@ -175,7 +183,7 @@ def update(frame_number):
     #clear previous display           
     fig.clear()
     #create global variable to modify local variable outside of function
-    global carry_on
+
 
     #make plot based on size of environment
     plot.xlim(0, len(env))
@@ -197,6 +205,8 @@ def update(frame_number):
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
+'''
+
 
 for i in range (num_of_drunks):
     while drunks[i].home == False:
@@ -206,7 +216,7 @@ for i in range (num_of_drunks):
         if drunks[i].env[drunks[i]._y][drunks[i]._x] == drunks[i].houseno: # If the agent's location is the same as their house number
             drunks[i].home = True
             print ("Finally I'm back! Off to bed!")
-
+'''
 
 
 '''

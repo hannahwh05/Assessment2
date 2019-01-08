@@ -38,8 +38,68 @@ class Drunk():
         self.houseCoords = houseCoords
         self.home = False
 
-            
-    '''          
+      
+    def stumble(self):
+        #x coordinate of drunk plus a number
+        moveR = self._x + unitsMoveBy
+        moveL = self._x - unitsMoveBy
+        #furthest extent of environment on x axis i.e. far right
+        wallX = self._envWidth
+
+        #move along x axis i.e. right or left
+        #if random number produced (between 0 and 1) is less than 0.5
+        if random.random() < 0.5:
+            #and if value of the environment at the location of the drunk 
+            #plus a number on the x axis is equal to 0
+            if self.env[moveR][self._y] == 0:
+                #and within the environment boundary (i.e. if moveR is greater 
+                #than or equal to zero and less than or equal to the width of 
+                #the environment
+                if moveR >=0 and moveR <= wallX:
+                    #then drunk moves right
+                    self._x = moveR
+        #if conditions are not met above then
+        #if value of the environment at the location of the drunk 
+        #minus a number on the x axis is equal to 0
+        elif self.env[moveL][self._y] == 0:
+            #and if within environment boundary
+            if moveL >=0 and moveL <= wallX:
+                #then drunk moves left
+                self._x = moveL
+        
+        #y coordinate of drunk plus a number
+        moveUp = self._y + unitsMoveBy
+        #y coordinate of drunk minus a number
+        moveDown = self._y - unitsMoveBy
+        #furthest extent of environment on y axis i.e. top
+        wallY = self._envHeight
+
+        #move along y axis i.e. up or down
+        #if random number produced (between 0 and 1) is less than 0.5
+        if random.random() < 0.5:
+            #and if value of the environment at the location of the drunk 
+            #plus a number on the y axis is equal to 0
+            if self.env[self._x][moveUp] == 0:
+                #and if within environment boundary (i.e. if moveUp is greater 
+                #than or equal to zero and less than or equal to the height of 
+                #the environment
+                if moveUp >=0 and moveUp <= wallY:
+                    #then drunk moves up
+                    self._y = moveUp
+        #if conditions are not met above then
+        #if value of the environment at the location of the drunk 
+        #minus a number on y axis is equal to 0
+        elif self.env[self._x][moveDown] == 0:
+            #and if within environment boundary
+            if moveDown >=0 and moveDown <= wallY:
+                #then drunk moves down
+                self._y = moveDown
+
+    def home(self):
+        if self.env[self._x + 1][self._y] == self.houseCoords:
+            [self._x][self._y] = self.houseCoords 
+
+    '''
     def stumble(self):
         """
         Movement of Drunk within the environment.
@@ -48,6 +108,7 @@ class Drunk():
         space if more than 0.5 (random number is between 0.0-1.0).
         "%" operator keeps the agents within the environment.       
         """
+
         
         if random.random() < 0.5:
             if self.env[self._x + unitsMoveBy][self._y] == 0:
@@ -60,28 +121,7 @@ class Drunk():
                 self._y = (self._y + unitsMoveBy) % self._envHeight
         elif self.env[self._x][self._y - unitsMoveBy] == 0:
             self._y = (self._y - unitsMoveBy) % self._envHeight
-    '''
-        
-    def stumble(self):
-        xmove = self._x + 1
-        wallX = self._envWidth - 1
-        if random.random() < 0.5:
-            if self.env[self._x + unitsMoveBy][self._y] == 0:
-                if xmove >=0 and xmove <= wallX:
-                    self._x = (self._x + unitsMoveBy)
-        elif self.env[self._x - unitsMoveBy][self._y] == 0:
-            if xmove >=0 and xmove <= wallX:
-                self._x = (self._x - unitsMoveBy)
-        # Move y i.e. up and down
-        ymove = self._y + 1
-        wallY = self._envHeight - 1
-        if random.random() < 0.5:
-            if self.env[self._x][self._y + unitsMoveBy] == 0:
-                if ymove >=0 and ymove <= wallY:
-                    self._y = (self._y + unitsMoveBy)
-        elif self.env[self._x][self._y - unitsMoveBy] == 0:
-            if ymove >=0 and ymove <= wallY:
-                self._y = (self._y - unitsMoveBy)
+        '''
 
     '''
     def boundary(self):
@@ -98,35 +138,11 @@ class Drunk():
         elif [self._x][self._y - unitsMoveBy] <= 1:
             self._y = 1
     
-    def home(self):
-        if self.env[self._x + 1][self._y] == self.houseCoords:
-            [self._x][self._y] = self.houseCoords         
-    '''    
-    
-'''
-        if random.random() < 0.5:
-            if self.env[self._x][self._y + unitsMoveBy] == 0:
-                self._y = (self._y + unitsMoveBy) % self._envHeight
-        elif self.env[self._x][self._y - unitsMoveBy] == 0:
-            self._y = (self._y - unitsMoveBy) % self._envHeight           
-    
-        if self._x < 0:
-            self._x = 0
-        if self._y < 0:
-            self._y = 0
-        if self._x > self.envWidth:
-            self._x = self.envWidth
-        if self._y > self.envHeight:
-            self._y = self.envHeight            
-'''
-'''       
-    def distance_between(self, agents_row_b):
-        """
-        Returns the distance between row a and row b using Pythagoras theorum.
-        """
-        return (((self._x - agents_row_b._x)**2) +
-                ((self._y - agents_row_b._y)**2))**0.5
-'''               
+        
+    '''         
+
+
+             
 
 
             
