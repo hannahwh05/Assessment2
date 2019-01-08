@@ -25,7 +25,7 @@ import random
 unitsMoveBy = 5
 
 class Drunk():
-    def __init__(self, env, drunks, houseno, pubDoor, houseCoords, home, 
+    def __init__(self, env, drunks, houseno, pubDoor, houseCoords, 
                  x=None, y=None):
         self.env = env
         #Make Drunk aware of the other agents
@@ -37,14 +37,6 @@ class Drunk():
         self.houseno = houseno
         self.houseCoords = houseCoords
         self.home = False
-
-    def home_distance(self):
-        """
-        Returns the distance between the drunk's house and their starting
-        point at the pub door, using Pythagoras theorum.
-        """
-        return ((((self.housecoords[0] - self._x)**2) +
-                ((self.housecoords[1] - self._y)**2))**0.5)
       
     def stumble(self):
         #x coordinate of drunk plus a number
@@ -106,7 +98,9 @@ class Drunk():
                 #then drunk moves down
                 self._y = moveDown
 
-
+    def home(self):
+        if self.env == self.houseCoords:
+            self.home = True
             
 
     '''

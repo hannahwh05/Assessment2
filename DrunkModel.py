@@ -133,7 +133,7 @@ def coordsFinder(ID):
     #pubExit = pubCoordsList[9] 
     '''
     Assuming the building is square, this finds the width of the building by
-    finding the square root of the length of the pubCoordsList, and dividing by
+    finding the square root of the length of the coordsList, and dividing by
     two to find the middle point. 
     '''
     Door = coordsList[int(math.sqrt((float(len(coordsList))))/2)] 
@@ -155,21 +155,29 @@ for i in housenoList:
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
 
-def home(self):
-    if self.env == self.houseCoords:
-        self.home = True
+def home_distance(houseCoordsList, pubDoor):
+    """
+    Returns the distance between the drunk's house and their starting
+    point at the pub door, using Pythagoras' theorum.
+    """
+    return ((((houseCoordsList[0] - pubDoor[0])**2) + 
+             ((houseCoordsList[1] - pubDoor[1])**2))**0.5)
+    
+distList = []
 
+for i in range(num_of_drunks):
+    distList.append(home_distance)    
 
+print(distList)
 
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
-                                       houseCoordsList[i], home))
+                                       houseCoordsList[i]))
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
-
 
 
 def update(frame_number):
