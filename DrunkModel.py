@@ -81,27 +81,6 @@ f.close()
 #plot.show()
 #plot.colorbar()
 
-f = open('route_environ.txt', newline='') 
-reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
-
-route_taken = []
-re = route_taken
-for row2 in reader:
-    #set up row container	
-    rowlist2 = []		
-    for value in row2:
-        #append values from rows in csv file to rowlist
-        rowlist2.append(value)
-    #append rowlist values from for loop into environment container
-    re.append(rowlist)
-
-#Close the reader    				
-f.close()
-
-#test to see route_environ
-#plot.imshow(re, plot.cm.get_cmap('Blues'))
-
-
 ###############################################################################
 ##########################'''Step 4: Plot agents'''############################
 ###############################################################################
@@ -166,7 +145,13 @@ for i in range(num_of_drunks):
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
+route_environ = []
 
+for i in range(300):
+    rowlist = []
+    for j in range(300):
+        rowlist.append(0)
+    route_environ.append(rowlist)
 
 def update(frame_number):
     """
@@ -177,11 +162,11 @@ def update(frame_number):
     #clear previous display           
     fig.clear()
     
-    #for each agent - move, eat, share with neighbours and vomit 
+    #for each agent - move
     for i in range(num_of_drunks):
         #agents randomly move around environment
         drunks[i].stumble()
-    
+        
     #make plot based on size of environment 
     plot.xlim(0, len(env))
     plot.ylim(len(env[0]), 0)
@@ -199,12 +184,14 @@ def update(frame_number):
 ###############################################################################
        
 '''
+########## breaks code
+
 for i in range (num_of_drunks):
     while drunks[i].home==False:
         drunks[i].stumble()
         #route_environ[drunks[i]._y][drunks[i]._x]+=1
         # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if drunks[i].env[drunks[i]._y][drunks[i]._x]==drunks[i].houseno: # If the agent's location is the same as their house number
+        if drunks[i].env == drunks[i].houseno: # If the agent's location is the same as their house number
             drunks[i].home=True
             print (i, " : Finally I'm back! Off to bed!")
 '''
