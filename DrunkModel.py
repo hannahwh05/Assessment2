@@ -92,7 +92,6 @@ housenoList = []
 houseCoordsList = []
 pubDoor = []
 
-#Determine where pub is in the environment
 def coordsFinder(ID):
     """
     Finds the coordinates for the door of a building. 
@@ -104,9 +103,9 @@ def coordsFinder(ID):
     #for every row in the .txt file
     for i in range(0,len(env)):
         #for every column in the .txt file
-        for j in range(0,len(env[0])):
+        for j in range(0, len(env[0])):
             #if the value at coordinate [i][j] is equal to ID given
-            if env[i][j] == ID: 
+            if env[j][i] == ID: 
                 coordsList.append([i,j])
     #Door is in middle of top row of square
     #pubExit = pubCoordsList[9] 
@@ -118,7 +117,7 @@ def coordsFinder(ID):
     
     Door = coordsList[int(math.sqrt((float(len(coordsList))))/2)] 
     return Door;
-    
+  
 pubDoor = coordsFinder(1)
 #print(pubDoor) #test to see if correct output
 
@@ -153,6 +152,8 @@ for i in range(300):
         rowlist.append(0)
     route_environ.append(rowlist)
 
+
+        
 def update(frame_number):
     """
     Updates the display in the animation:
@@ -166,6 +167,7 @@ def update(frame_number):
     for i in range(num_of_drunks):
         #agents randomly move around environment
         drunks[i].stumble()
+        drunks[i].back_home() 
         
     #make plot based on size of environment 
     plot.xlim(0, len(env))

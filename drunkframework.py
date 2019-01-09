@@ -40,8 +40,8 @@ class Drunk():
         Returns the distance between the drunk's house and their starting
         point at the pub door, using Pythagoras' theorum.
         """
-        return int(((((houseCoords[0] - X)**2) + 
-                 ((houseCoords[1] - Y)**2))**0.5))
+        return ((((houseCoords[0] - X)**2) + 
+                 ((houseCoords[1] - Y)**2))**0.5)
      
     def stumble(self):
         #change number of places moved by drunk
@@ -67,10 +67,10 @@ class Drunk():
             self._y = moveDown
         #print(self.houseno, currDist)
 
-    def home(self):
-        if self.env == self.houseCoords:
+    def back_home(self):
+        if [self._x, self._y] == self.houseCoords:
             self.home = True
-            print(self.houseCoords, "Finally I'm back! Off to bed!")
+                print(houseno, houseCoordsList[i], "Finally I'm back! Off to bed!")
         
   
 '''                
