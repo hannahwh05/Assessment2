@@ -21,9 +21,6 @@ Version 1.0.0
 
 import random
 
-#change number of places moved by drunk
-unitsMoveBy = random.randint(1,5)
-
 class Drunk():
     def __init__(self, env, drunks, houseno, pubDoor, houseCoords, 
                  x=None, y=None):
@@ -43,10 +40,12 @@ class Drunk():
         Returns the distance between the drunk's house and their starting
         point at the pub door, using Pythagoras' theorum.
         """
-        return ((((houseCoords[0] - X)**2) + 
-                 ((houseCoords[1] - Y)**2))**0.5)
-    
+        return int(((((houseCoords[0] - X)**2) + 
+                 ((houseCoords[1] - Y)**2))**0.5))
+     
     def stumble(self):
+        #change number of places moved by drunk
+        unitsMoveBy = random.randint(1,5)
         moveR = self._x + unitsMoveBy
         moveL = self._x - unitsMoveBy
         moveUp = self._y + unitsMoveBy
@@ -66,14 +65,45 @@ class Drunk():
                 self._y = moveUp
         elif moveDownDist <= currDist:
             self._y = moveDown
+        #print(self.houseno, currDist)
+
+    def home(self):
+        if self.env == self.houseCoords:
+            self.home = True
+            print(self.houseCoords, "Finally I'm back! Off to bed!")
+        
+  
+'''                
+    ####test to see where they think houseCoords are
+    def stumble(self):
+        #change number of places moved by drunk
+        unitsMoveBy = random.randint(1,5)
+        moveR = self._x + unitsMoveBy
+        moveL = self._x - unitsMoveBy
+        moveUp = self._y + unitsMoveBy
+        moveDown = self._y - unitsMoveBy
+        currDist = self.home_distance(self.houseCoords, self._x, self._y)
+        moveRDist = self.home_distance(self.houseCoords, moveR, self._y)
+        moveLDist = self.home_distance(self.houseCoords, moveL, self._y)
+        moveUpDist = self.home_distance(self.houseCoords, self._x, moveUp)
+        moveDownDist = self.home_distance(self.houseCoords, self._x, moveDown)
+        if random.random() < 0.5:
+            if moveRDist <= currDist:
+                self._x = 138
+        elif moveLDist <= currDist:
+            self._x = 138
+        if random.random() < 0.5:
+            if moveUpDist <= currDist:
+                self._y = 138
+        elif moveDownDist <= currDist:
+            self._y = 138
+        print(self.houseno, currDist)
+'''            
+        
+        
             
-            
         
-        
-        
-            
-        
-    '''       
+'''       
     #keep to show development of model!!!
     
     def stumble(self):
@@ -142,12 +172,7 @@ class Drunk():
                 if moveDown >=0 and moveDown <= wallY:
                     #then drunk moves down
                     self._y = moveDown
-        '''
-    '''    
-    def home(self):
-        if self.env == self.houseCoords:
-            self.home = True
-    '''
+'''
 
              
 

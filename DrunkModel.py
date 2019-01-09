@@ -136,6 +136,7 @@ def coordsFinder(ID):
     finding the square root of the length of the coordsList, and dividing by
     two to find the middle point. 
     '''
+    
     Door = coordsList[int(math.sqrt((float(len(coordsList))))/2)] 
     return Door;
     
@@ -166,6 +167,7 @@ fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
 
+
 def update(frame_number):
     """
     Updates the display in the animation:
@@ -180,8 +182,7 @@ def update(frame_number):
         #agents randomly move around environment
         drunks[i].stumble()
     
-
-    #make plot based on size of environment
+    #make plot based on size of environment 
     plot.xlim(0, len(env))
     plot.ylim(len(env[0]), 0)
     plot.imshow(env, plot.cm.get_cmap('Blues'))
@@ -190,8 +191,7 @@ def update(frame_number):
     #plot.imshow(re, plot.cm.get_cmap('Blues'))
     
     for i in range(num_of_drunks):
-        plot.scatter(drunks[i]._x, drunks[i]._y)
-        
+        plot.scatter(drunks[i]._x, drunks[i]._y)        
 
 
 ###############################################################################
