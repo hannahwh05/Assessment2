@@ -156,14 +156,6 @@ for i in housenoList:
                         # correct coordinates
 
 
-    
-#distList = []
-#
-#for i in range(num_of_drunks):
-#    distList.append(home_distance(houseCoordsList[i], pubDoor))    
-#
-#print(distList)
-
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
@@ -182,8 +174,12 @@ def update(frame_number):
     """
     #clear previous display           
     fig.clear()
-    #create global variable to modify local variable outside of function
-
+    
+    #for each agent - move, eat, share with neighbours and vomit 
+    for i in range(num_of_drunks):
+        #agents randomly move around environment
+        drunks[i].stumble()
+    
 
     #make plot based on size of environment
     plot.xlim(0, len(env))
@@ -196,31 +192,22 @@ def update(frame_number):
     for i in range(num_of_drunks):
         plot.scatter(drunks[i]._x, drunks[i]._y)
         
-    #for each agent - move, eat, share with neighbours and vomit 
-    for i in range(num_of_drunks):
-        #agents randomly move around environment
-        drunks[i].stumble()
-        #drunks[i].boundary()
+
 
 ###############################################################################
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
-
-for i in range(num_of_drunks):
-    if drunks[i].home == True:
-        print(i, " : Finally I'm back! Off to bed!")
-        
+       
 '''
 for i in range (num_of_drunks):
-    while drunks[i].home == False:
+    while drunks[i].home==False:
         drunks[i].stumble()
-        re[drunks[i]._y][drunks[i]._x]=0
+        #route_environ[drunks[i]._y][drunks[i]._x]+=1
         # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if drunks[i].env[drunks[i]._y][drunks[i]._x] == drunks[i].houseno: # If the agent's location is the same as their house number
-            drunks[i].home = True
-            print ("Finally I'm back! Off to bed!")
+        if drunks[i].env[drunks[i]._y][drunks[i]._x]==drunks[i].houseno: # If the agent's location is the same as their house number
+            drunks[i].home=True
+            print (i, " : Finally I'm back! Off to bed!")
 '''
-
 
 '''
 # generator function to set condition for when to stop 
