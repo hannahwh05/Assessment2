@@ -67,10 +67,12 @@ class Drunk():
             self._y = moveDown
         #print(self.houseno, currDist)
 
+
     def back_home(self):
         if [self._x, self._y] == self.houseCoords:
             self.home = True
-                print(houseno, houseCoordsList[i], "Finally I'm back! Off to bed!")
+            print(self.houseno, self.houseCoords, 
+                  "Finally I'm back! Off to bed!")
         
   
 '''                

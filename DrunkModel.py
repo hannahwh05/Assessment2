@@ -133,8 +133,18 @@ for i in housenoList:
     
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
+'''
+########## breaks code
 
-
+for i in range (num_of_drunks):
+    while drunks[i].back_home==False:
+        drunks[i].stumble()
+        #route_environ[drunks[i]._y][drunks[i]._x]+=1
+        # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
+        if (drunks[i]._x, drunks[i]._y) == drunks[i].houseCoords: # If the agent's location is the same as their house number
+            drunks[i].back_home = True
+            print (i, " : Finally I'm back! Off to bed!")
+'''            
 #for loop to append environment, drunks and 
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
@@ -185,18 +195,9 @@ def update(frame_number):
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
        
-'''
-########## breaks code
 
-for i in range (num_of_drunks):
-    while drunks[i].home==False:
-        drunks[i].stumble()
-        #route_environ[drunks[i]._y][drunks[i]._x]+=1
-        # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if drunks[i].env == drunks[i].houseno: # If the agent's location is the same as their house number
-            drunks[i].home=True
-            print (i, " : Finally I'm back! Off to bed!")
-'''
+
+
 
 '''
 # generator function to set condition for when to stop 
