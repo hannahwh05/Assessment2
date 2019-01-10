@@ -1,6 +1,6 @@
 '''
 GEOG5990M Programming for Geographical Information Analysis: Core Skills
-Assignment 2: Drunk Model
+Assignment 2: Planning for drunks - Show me the way to go home...
 
 201284811 Hannah Wheldon
 GitHub username: hannahwh05
@@ -11,10 +11,7 @@ This model is run from tkinter GUI.
 When this code is run, a window will will appear on the computer screen called
 Drunk Model. To run the model, click "Run" from the "Menu" in this 
 window. When the model has met the "stopping condition", close the window and
-the figure will be printed to the console. 
-
-n.b. to run model with random coordinates instead of scraping from webpage, 
-remove 3rd and 4th arguements i.e. y, x in Step 4.
+the final figure will be printed to the console. 
 
 In Spyder set Tools > Preferences > Ipython console > Graphics > Set backend 
 to inline
@@ -27,16 +24,16 @@ Use drunkframework.py for drunk class
 ###############################################################################
 '''import libraries/functions/packages at top of code'''
 
-#2D plotting library
-import matplotlib
-import matplotlib.pyplot as plot
-#animate plot
-import matplotlib.animation as ani
 #framework to build tkinter graphics interface
 import tkinter
+#2D plotting library
+import matplotlib
 matplotlib.use('TkAgg')
 #tkinter backend
 import matplotlib.backends.backend_tkagg
+import matplotlib.pyplot as plt
+#animate plot
+import matplotlib.animation as ani
 #imports agent from separate coded file to prevent repetition
 import drunkframework
 #imports raster data from csv file
@@ -50,13 +47,12 @@ import math
 
 num_of_drunks = 25
 
-
 ###############################################################################
 #######################'''Step 2: Import environment'''########################
 ###############################################################################
-'''read in raster data from csv'''
+'''read in town plan raster data from csv'''
 
-f = open('drunk.txt', newline='') 
+f = open('town_plan.txt', newline='') 
 reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
 
 #set up environment container to read data into
@@ -77,14 +73,14 @@ f.close()
 #len(env) # test to see size of environment based on csv file
 
 #test to see environment alone
-#plot.imshow(env)
-#plot.show()
-#plot.colorbar()
+#plt.imshow(env)
+#plt.show()
+#plt.colorbar()
 
 ###############################################################################
 ##########################'''Step 4: Plot agents'''############################
 ###############################################################################
-# set up container for agents
+ set up container for agents
 
 drunks = []
 ID = []
@@ -180,15 +176,15 @@ def update(frame_number):
         drunks[i].back_home() 
         
     #make plot based on size of environment 
-    plot.xlim(0, len(env))
-    plot.ylim(len(env[0]), 0)
-    plot.imshow(env, plot.cm.get_cmap('Blues'))
-    plot.colorbar()
+    plt.xlim(0, len(env))
+    plt.ylim(len(env[0]), 0)
+    plt.imshow(env, plt.cm.get_cmap('Blues'))
+    plt.colorbar()
     #overlay route_environ on top of environment
     #plot.imshow(re, plot.cm.get_cmap('Blues'))
     
     for i in range(num_of_drunks):
-        plot.scatter(drunks[i]._x, drunks[i]._y)        
+        plt.scatter(drunks[i]._x, drunks[i]._y)        
 
 
 ###############################################################################

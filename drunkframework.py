@@ -9,21 +9,39 @@ DrunkModel code.
 GitHub username: hannahwh05
 
 Version 1.0.0
-'''
 
-'''
-1. Drunk moves randomly left, right, up, down in loop
-2. When it hits the correctly numbered house, stop process and begin with next drunk
-3. Add 1 to each point the drunk moves 
-4. Stop drunk from retracing steps
+
+1. Drunk moves randomly left, right, up, down in loop if proposed movement is 
+   less than or equal to the distance to their home.
 
 '''
 
 import random
 
 class Drunk():
+    """
+    Drunk class:
+    A class to describe the moment of a drunk person from a pub to their home 
+    in a town.
+    Characteristics:
+        - x-coordinate
+        - y-coordinate
+        - House number/home
+        - store
+    """
     def __init__(self, env, drunks, houseno, pubDoor, houseCoords, 
                  x=None, y=None):
+        """
+        Constructor takes arguments:
+        env -- a list (environment) of lists (rowlists), imported from a csv 
+               file, creating the 2D landscape in which the drunk exists.
+        drunks -- all the agents in the environment.
+        houseno -- house number assigned to drunk
+        pubDoor -- the coordinates for the pub door at which all drunks begin 
+        their journey.
+        x -- the x axis coordinate.
+        y -- the y axis coordinate.
+        """
         self.env = env
         #Make Drunk aware of the other agents
         self.drunks = drunks
@@ -52,39 +70,56 @@ class Drunk():
         Drunk moves along x and y axis dependent on a random number generated.
         Drunk moves right if random number is less than 0.5 
         (random number is between 0.0-1.0), and if the proposed distance to 
-        home is equal to or less than the current distance. Otherwise drunk 
-        moves left if the f the proposed distance to home is equal to or less 
-        than the current distance. This is the same for movements up and down.
-        .
+        home is equal to or less than the current distance (this gives each 
+        drunk some direction to home). Otherwise drunk moves left if the the 
+        proposed distance to home is equal to or less than the current 
+        distance. This is the same for movements up and down.
         """
         #Can change number of places moved by drunk. Currently a random number
         #between 1 and 5.
         unitsMoveBy = random.randint(1,5)
+        #x coordinate of drunk plus a number.
         moveR = self._x + unitsMoveBy
+        #x coordinate of drunk minus a number.
         moveL = self._x - unitsMoveBy
+        #y coordinate of drunk plus a number.
         moveUp = self._y + unitsMoveBy
+        #y coordinate of drunk minus a number.
         moveDown = self._y - unitsMoveBy
-        #Distance between current coordinates and drunk's home.
+        #Distance between drunk's current position and drunk's home.
         currDist = self.home_distance(self.houseCoords, self._x, self._y)
-        #
+        #Potential distance to drunk's home after move taken below.
         moveRDist = self.home_distance(self.houseCoords, moveR, self._y)
         moveLDist = self.home_distance(self.houseCoords, moveL, self._y)
         moveUpDist = self.home_distance(self.houseCoords, self._x, moveUp)
         moveDownDist = self.home_distance(self.houseCoords, self._x, moveDown)
+        #move along x axis i.e. right or left.
+        #if random number produced (between 0 and 1) is less than 0.5
         if random.random() < 0.5:
+            #and if value of the environment at the location of the drunk 
+            #plus a number on the x axis is equal to 0 or house location
             if moveRDist <= currDist:
+                #then drunk moves right
                 self._x = moveR
         elif moveLDist <= currDist:
+            #then drunk moves left
             self._x = moveL
         if random.random() < 0.5:
             if moveUpDist <= currDist:
+                #then drunk moves up
                 self._y = moveUp
         elif moveDownDist <= currDist:
+            #then drunk moves down
             self._y = moveDown
         #print(self.houseno, currDist)
 
 
     def back_home(self):
+        """
+        Describes if the drunk has reached their home.
+        If their current position is the same as their house door coordinates,
+        then they have made it home.
+        """
         if [self._x, self._y] == self.houseCoords:
             self.home = True
             print(self.houseno, self.houseCoords, 
