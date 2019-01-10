@@ -37,20 +37,36 @@ class Drunk():
     
     def home_distance(self, houseCoords, X, Y):
         """
-        Returns the distance between the drunk's house and their starting
-        point at the pub door, using Pythagoras' theorum.
+        Returns the distance to the drunk's house, using Pythagoras' theorum.
+        Input X and Y coordinates of drunk's current or proposed location.
         """
         return ((((houseCoords[0] - X)**2) + 
                  ((houseCoords[1] - Y)**2))**0.5)
      
     def stumble(self):
-        #change number of places moved by drunk
+        """
+        Movement of drunk within the environment.
+        
+        Can change number of spaces to be moved if condtions are met.
+        
+        Drunk moves along x and y axis dependent on a random number generated.
+        Drunk moves right if random number is less than 0.5 
+        (random number is between 0.0-1.0), and if the proposed distance to 
+        home is equal to or less than the current distance. Otherwise drunk 
+        moves left if the f the proposed distance to home is equal to or less 
+        than the current distance. This is the same for movements up and down.
+        .
+        """
+        #Can change number of places moved by drunk. Currently a random number
+        #between 1 and 5.
         unitsMoveBy = random.randint(1,5)
         moveR = self._x + unitsMoveBy
         moveL = self._x - unitsMoveBy
         moveUp = self._y + unitsMoveBy
         moveDown = self._y - unitsMoveBy
+        #Distance between current coordinates and drunk's home.
         currDist = self.home_distance(self.houseCoords, self._x, self._y)
+        #
         moveRDist = self.home_distance(self.houseCoords, moveR, self._y)
         moveLDist = self.home_distance(self.houseCoords, moveL, self._y)
         moveUpDist = self.home_distance(self.houseCoords, self._x, moveUp)
