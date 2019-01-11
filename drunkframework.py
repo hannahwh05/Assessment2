@@ -27,9 +27,9 @@ class Drunk():
         - x-coordinate
         - y-coordinate
         - House number/home
-        - store
+        - *****************
     """
-    def __init__(self, env, drunks, houseno, pubDoor, houseCoords, 
+    def __init__(self, env, route_env, drunks, houseno, pubDoor, houseCoords, 
                  x=None, y=None):
         """
         Constructor takes arguments:
@@ -43,6 +43,7 @@ class Drunk():
         y -- the y axis coordinate.
         """
         self.env = env
+        self.route_env = route_env
         #Make Drunk aware of the other agents
         self.drunks = drunks
         self._envWidth = len(env) 
@@ -104,6 +105,7 @@ class Drunk():
         elif moveLDist <= currDist:
             #then drunk moves left
             self._x = moveL
+   
         if random.random() < 0.5:
             if moveUpDist <= currDist:
                 #then drunk moves up
@@ -111,7 +113,10 @@ class Drunk():
         elif moveDownDist <= currDist:
             #then drunk moves down
             self._y = moveDown
-        #print(self.houseno, currDist)
+        #print(self.houseno, currDist) #test
+        
+        self.route_env[self._y][self._x] += 100
+        
 
 
     def back_home(self):

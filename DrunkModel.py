@@ -128,36 +128,26 @@ for i in housenoList:
     
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
-'''
-########## breaks code
-
-for i in range (num_of_drunks):
-    while drunks[i].back_home==False:
-        drunks[i].stumble()
-        #route_environ[drunks[i]._y][drunks[i]._x]+=1
-        # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-        if (drunks[i]._x, drunks[i]._y) == drunks[i].houseCoords: # If the agent's location is the same as their house number
-            drunks[i].back_home = True
-            print (i, " : Finally I'm back! Off to bed!")
-'''            
+    
+#container for routes taken
+route_environ = []
+#create empty environment to append routes taken by drunks, later on in code
+for i in range(300):
+    rowlist = []
+    for j in range(300):
+        rowlist.append(0)
+    route_environ.append(rowlist)
+        
 #for loop to append environment and drunks
 for i in range(num_of_drunks):
-    drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
+    drunks.append(drunkframework.Drunk(env, route_environ, drunks, housenoList[i], pubDoor, 
                                        houseCoordsList[i]))
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
-#container for routes taken
-route_environ = []
-
-for i in range(300):
-    rowlist = []
-    for j in range(300):
-        rowlist.append(0)
-    route_environ.append(rowlist)
-
+carry_on = True
 
         
 def update(frame_number):
@@ -169,10 +159,32 @@ def update(frame_number):
     #clear previous display           
     fig.clear()
     
+    global carry_on
+    
+    no_of_drunks_home = 0
+
+    
+    for i in range(num_of_drunks):
+        if drunks[i].home==True:
+            no_of_drunks_home += 1
+            
+    if no_of_drunks_home == num_of_drunks:
+        carry_on = False
+    
     for i in range(num_of_drunks):
         #drunks move around environment
-        drunks[i].stumble()
-        drunks[i].back_home() 
+        #drunks[i].stumble()
+        #drunks[i].back_home() 
+        
+        
+        if drunks[i].home==False:
+            drunks[i].stumble()
+            drunks[i].back_home()
+            #route_environ[drunks[i]._y][drunks[i]._x]+=1
+            # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
+#            if (drunks[i]._x, drunks[i]._y) == drunks[i].houseCoords: # If the agent's location is the same as their house number
+#                drunks[i].back_home = True
+#                print (i, " : Finally I'm back! Off to bed!")
         
     #make plot based on size of environment 
     plt.xlim(0, len(env))
@@ -184,7 +196,7 @@ def update(frame_number):
     #create legend
     plt.colorbar()
     #overlay route_environ on top of environment
-    #plot.imshow(re, plot.cm.get_cmap('Blues'))
+    plt.imshow(route_environ, plt.cm.get_cmap('Blues'))
     
     #plot all the drunks
     for i in range(num_of_drunks):
@@ -195,11 +207,6 @@ def update(frame_number):
 ######################'''Step 4: Stopping condition'''#########################
 ###############################################################################
        
-
-
-
-
-'''
 # generator function to set condition for when to stop 
 def gen_function(b = [0]):
     """A stopping function for the animation"""
@@ -209,8 +216,8 @@ def gen_function(b = [0]):
         #function returns generator
         yield a			
         a = a + 1
-    print("stopping condition")
-'''   
+    print("Stopping condition has been met. All drunks are home!")
+  
 ###############################################################################
 #########################'''Step 5: Run the model'''###########################
 ############################################################################### 
@@ -218,7 +225,10 @@ def gen_function(b = [0]):
 def run():
     """ Run model to animate plot for GUI interface"""
     global animation
-    animation = ani.FuncAnimation(fig, update, repeat=False)
+#    animation = ani.FuncAnimation(fig, update, repeat=False)
+#    canvas.draw()
+    animation = ani.FuncAnimation(fig, update, 
+                frames=gen_function, repeat=False)
     canvas.draw()
 
 ###############################################################################
