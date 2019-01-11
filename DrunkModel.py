@@ -34,12 +34,15 @@ import matplotlib.backends.backend_tkagg
 import matplotlib.pyplot as plt
 #animate plot
 import matplotlib.animation as ani
+import IPython
 #imports agent from separate coded file to prevent repetition
 import drunkframework
 #imports raster data from csv file
 import csv
+import os
 import math
 import random
+#import numpy
 
 ###############################################################################
 ####################'''Step 1: Assign value to variables'''####################
@@ -151,7 +154,17 @@ ax = fig.add_axes([0, 0, 1, 1])
 
 carry_on = True
 
-        
+#container to append the town plan to the density map
+densityTP = []
+
+#create empty environment to append routes taken by drunks, later on in code
+for i in range(300):
+    rowlist = []
+    for j in range(300):
+        #rowlist.append(env[i][j]+route_environ[i][j])
+                rowlist.append(route_environ[i][j])
+    densityTP.append(rowlist)
+     
 def update(frame_number):
     """
     Updates the display in the animation:
@@ -165,7 +178,6 @@ def update(frame_number):
     
     no_of_drunks_home = 0
 
-    
     for i in range(num_of_drunks):
         if drunks[i].home==True:
             no_of_drunks_home += 1
@@ -193,7 +205,7 @@ def update(frame_number):
     #create legend
     plt.colorbar()
     #overlay route_environ on top of environment
-    plt.imshow(route_environ, plt.cm.get_cmap('Blues'))
+    #plt.imshow(densityTP, plt.cm.get_cmap('Blues'))
     
     #plot all the drunks
     for i in range(num_of_drunks):
@@ -249,7 +261,38 @@ model_menu.add_command(label="Close", command=root.destroy)
 tkinter.mainloop()
 
 ###############################################################################
+###################'''Step 6: Save density map to csv'''#######################
+###############################################################################
 
-#plt.imshow(route_environ, plt.cm.get_cmap('Blues'))
+#saves density data to current file directory as "density" text file
+#n.b. this can be changed to .csv
+csvfile = os.path.dirname(os.path.abspath(__file__))+"\density.txt"
+
+with open(csvfile, "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerows(route_environ)
+
+###############################################################################
+
+shell = IPython.get_ipython()
+shell.enable_matplotlib(gui='inline')
+
+# set up figure size and axes
+fig = matplotlib.pyplot.figure(figsize=(8, 8))
+ax = fig.add_axes([0, 0, 1, 1])
+plt.imshow(route_environ)# plt.cm.get_cmap('binary'))
+plt.colorbar()
+plt.savefig('density.png', bbox_inches = 'tight')
+
+#plt.imshow(densityTP, plt.cm.get_cmap('Set1'))
+#plt.savefig('densityTP.png')
+#Image.open('densityTP.png')
+
+#shell = IPython.get_ipython()
+#shell.enable_matplotlib(gui='automatic')
+#fig, ax = plt.subplots()
+#ax.imshow(densityTP, plt.cm.get_cmap('Blues'))
+#ax.grid()
+#plt.show()
 
 print("***Thank you for running the model***")
