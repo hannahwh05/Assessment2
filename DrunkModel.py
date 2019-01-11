@@ -17,6 +17,8 @@ In Spyder set Tools > Preferences > Ipython console > Graphics > Set backend
 to inline
 
 Use drunkframework.py for drunk class
+For this model town_plan.txt has been used in the environment. An alternative 
+environment could be imported.
 '''
 
 ###############################################################################
@@ -134,10 +136,11 @@ for i in housenoList:
     
 #container for routes taken
 route_environ = []
-#create empty environment to append routes taken by drunks, later on in code
-for i in range(300):
+#create empty environment to append values, to show points drunks have passed 
+#through, later on in code
+for i in range(0,len(env)):
     rowlist = []
-    for j in range(300):
+    for j in range(0, len(env[0])):
         rowlist.append(0)
     route_environ.append(rowlist)
         
@@ -189,7 +192,6 @@ def update(frame_number):
         #drunks move around environment
         #drunks[i].stumble()
         #drunks[i].back_home() 
-        
         
         if drunks[i].home==False:
             drunks[i].stumble()

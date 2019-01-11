@@ -10,10 +10,12 @@ GitHub username: hannahwh05
 
 Version 1.0.0
 
-
 1. Drunk moves randomly left, right, up, down in loop if proposed movement is 
    less than or equal to the distance to their home.
-
+2. Home distance is determined by the drunk's house coordinates and the x and y
+    values of the drunk. This can be either it's current or proposed position.
+3. Drunk knows it has reached home once it's current coordinates are equal to 
+    it's house door coordinates.
 '''
 
 import random
@@ -29,7 +31,7 @@ class Drunk():
         - House number/home
         - *****************
     """
-    def __init__(self, env, route_env, drunks, houseno, pubDoor, houseCoords, 
+    def __init__(self, env, route_environ, drunks, houseno, pubDoor, houseCoords, 
                  randomness, x=None, y=None):
         """
         Constructor takes arguments:
@@ -43,8 +45,8 @@ class Drunk():
         y -- the y axis coordinate.
         """
         self.env = env
-        self.route_env = route_env
-        #Make Drunk aware of the other agents
+        self.route_environ = route_environ
+        #Make Drunk aware of the other drunks
         self.drunks = drunks
         self._envWidth = len(env) 
         self._envHeight = len(env[0])
@@ -115,11 +117,10 @@ class Drunk():
             #then drunk moves down
             self._y = moveDown
         #print(self.houseno, currDist) #test
+        #Adds 100 to environment at every step
+        #n.b. y, x not x, y to be inline with reversed environment axes
+        self.route_environ[self._y][self._x] += 100
         
-        self.route_env[self._y][self._x] += 100
-        
-
-
     def back_home(self):
         """
         Describes if the drunk has reached their home.
@@ -232,9 +233,3 @@ class Drunk():
                     #then drunk moves down
                     self._y = moveDown
 '''
-
-             
-
-
-            
-            
