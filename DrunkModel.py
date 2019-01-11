@@ -78,9 +78,9 @@ f.close()
 #plt.colorbar()
 
 ###############################################################################
-##########################'''Step 4: Plot agents'''############################
+################'''Step 3: Find coordinates in environment'''##################
 ###############################################################################
- set up container for agents
+'''set up containers'''
 
 drunks = []
 ID = []
@@ -94,23 +94,22 @@ def coordsFinder(ID):
     Input ID of building.
     Outputs x,y coordinates of door of building within the environment.
     """
-   
     coordsList = []
-    #for every row in the .txt file
+    #for every row in the town_plan.txt file
     for i in range(0,len(env)):
-        #for every column in the .txt file
+        #for every column in the town_plan.txt file
         for j in range(0, len(env[0])):
-            #if the value at coordinate [i][j] is equal to ID given
+            #if the value at coordinate [j][i] is equal to ID given
             if env[j][i] == ID: 
                 coordsList.append([i,j])
     #Door is in middle of top row of square
     #pubExit = pubCoordsList[9] 
+    
     '''
     Assuming the building is square, this finds the width of the building by
     finding the square root of the length of the coordsList, and dividing by
     two to find the middle point. 
     '''
-    
     Door = coordsList[int(math.sqrt((float(len(coordsList))))/2)] 
     return Door;
   
@@ -141,7 +140,7 @@ for i in range (num_of_drunks):
             drunks[i].back_home = True
             print (i, " : Finally I'm back! Off to bed!")
 '''            
-#for loop to append environment, drunks and 
+#for loop to append environment and drunks
 for i in range(num_of_drunks):
     drunks.append(drunkframework.Drunk(env, drunks, housenoList[i], pubDoor, 
                                        houseCoordsList[i]))
@@ -150,6 +149,7 @@ for i in range(num_of_drunks):
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
+#container for routes taken
 route_environ = []
 
 for i in range(300):
@@ -169,20 +169,24 @@ def update(frame_number):
     #clear previous display           
     fig.clear()
     
-    #for each agent - move
     for i in range(num_of_drunks):
-        #agents randomly move around environment
+        #drunks move around environment
         drunks[i].stumble()
         drunks[i].back_home() 
         
     #make plot based on size of environment 
     plt.xlim(0, len(env))
+    #coordinates are reversed on y axis so environment is displayed as in 
+    #town_plan.txt file
     plt.ylim(len(env[0]), 0)
+    #colour environment using blues colour scheme
     plt.imshow(env, plt.cm.get_cmap('Blues'))
+    #create legend
     plt.colorbar()
     #overlay route_environ on top of environment
     #plot.imshow(re, plot.cm.get_cmap('Blues'))
     
+    #plot all the drunks
     for i in range(num_of_drunks):
         plt.scatter(drunks[i]._x, drunks[i]._y)        
 
