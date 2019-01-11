@@ -99,18 +99,18 @@ class Drunk():
         if random.random() < 0.5:
             #and if value of the environment at the location of the drunk 
             #plus a number on the x axis is equal to 0 or house location
-            if moveRDist <= currDist:
+            if moveRDist <= currDist or random.random() < 0.3:
                 #then drunk moves right
                 self._x = moveR
-        elif moveLDist <= currDist:
+        elif moveLDist <= currDist or random.random() < 0.3:
             #then drunk moves left
             self._x = moveL
    
         if random.random() < 0.5:
-            if moveUpDist <= currDist:
+            if moveUpDist <= currDist or random.random() < 0.3:
                 #then drunk moves up
                 self._y = moveUp
-        elif moveDownDist <= currDist:
+        elif moveDownDist <= currDist or random.random() < 0.3:
             #then drunk moves down
             self._y = moveDown
         #print(self.houseno, currDist) #test

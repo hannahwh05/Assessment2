@@ -253,4 +253,6 @@ tkinter.mainloop()
 
 ###############################################################################
 
+#plt.imshow(route_environ, plt.cm.get_cmap('Blues'))
+
 print("***Thank you for running the model***")
