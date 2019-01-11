@@ -38,8 +38,8 @@ import matplotlib.animation as ani
 import drunkframework
 #imports raster data from csv file
 import csv
-import numpy as np
 import math
+import random
 
 ###############################################################################
 ####################'''Step 1: Assign value to variables'''####################
@@ -140,8 +140,10 @@ for i in range(300):
         
 #for loop to append environment and drunks
 for i in range(num_of_drunks):
-    drunks.append(drunkframework.Drunk(env, route_environ, drunks, housenoList[i], pubDoor, 
-                                       houseCoordsList[i]))
+    randomness = random.random()/3
+    drunks.append(drunkframework.Drunk(env, route_environ, drunks, 
+                                       housenoList[i], pubDoor, 
+                                       houseCoordsList[i], randomness))
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
@@ -180,11 +182,6 @@ def update(frame_number):
         if drunks[i].home==False:
             drunks[i].stumble()
             drunks[i].back_home()
-            #route_environ[drunks[i]._y][drunks[i]._x]+=1
-            # For agents that made it home, set their arrival status to True to stop the code from rerunning those agents, and tell them to drunkely announce their arrival
-#            if (drunks[i]._x, drunks[i]._y) == drunks[i].houseCoords: # If the agent's location is the same as their house number
-#                drunks[i].back_home = True
-#                print (i, " : Finally I'm back! Off to bed!")
         
     #make plot based on size of environment 
     plt.xlim(0, len(env))

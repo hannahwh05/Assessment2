@@ -30,7 +30,7 @@ class Drunk():
         - *****************
     """
     def __init__(self, env, route_env, drunks, houseno, pubDoor, houseCoords, 
-                 x=None, y=None):
+                 randomness, x=None, y=None):
         """
         Constructor takes arguments:
         env -- a list (environment) of lists (rowlists), imported from a csv 
@@ -53,6 +53,7 @@ class Drunk():
         self.houseno = houseno
         self.houseCoords = houseCoords
         self.home = False
+        self.randomness = randomness
     
     def home_distance(self, houseCoords, X, Y):
         """
@@ -99,18 +100,18 @@ class Drunk():
         if random.random() < 0.5:
             #and if value of the environment at the location of the drunk 
             #plus a number on the x axis is equal to 0 or house location
-            if moveRDist <= currDist or random.random() < 0.3:
+            if moveRDist <= currDist or random.random() < self.randomness:
                 #then drunk moves right
                 self._x = moveR
-        elif moveLDist <= currDist or random.random() < 0.3:
+        elif moveLDist <= currDist or random.random() < self.randomness:
             #then drunk moves left
             self._x = moveL
    
         if random.random() < 0.5:
-            if moveUpDist <= currDist or random.random() < 0.3:
+            if moveUpDist <= currDist or random.random() < self.randomness:
                 #then drunk moves up
                 self._y = moveUp
-        elif moveDownDist <= currDist or random.random() < 0.3:
+        elif moveDownDist <= currDist or random.random() < self.randomness:
             #then drunk moves down
             self._y = moveDown
         #print(self.houseno, currDist) #test
