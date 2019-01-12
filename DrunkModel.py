@@ -11,7 +11,8 @@ This model is run from tkinter GUI.
 When this code is run, a window will will appear on the computer screen called
 Drunk Model. To run the model, click "Run" from the "Menu" in this 
 window. When the model has met the "stopping condition", close the window and
-the final figure will be printed to the console. 
+a density map showing the points where the drunks have passed through,
+will be printed to the console. 
 
 In Spyder set Tools > Preferences > Ipython console > Graphics > Set backend 
 to inline
@@ -44,7 +45,6 @@ import csv
 import os
 import math
 import random
-#import numpy
 
 ###############################################################################
 ####################'''Step 1: Assign value to variables'''####################
@@ -79,7 +79,6 @@ f.close()
 
 #test to see environment alone
 #plt.imshow(env)
-#plt.show()
 #plt.colorbar()
 
 ###############################################################################
@@ -133,7 +132,11 @@ for i in housenoList:
     
 #print(houseCoordsList) # test to see if houseCoordsList has appended the
                         # correct coordinates
-    
+
+###############################################################################
+###########'''Step 4: Create environment to add density data to'''#############
+###############################################################################
+                        
 #container for routes taken
 route_environ = []
 #create empty environment to append values, to show points drunks have passed 
@@ -143,7 +146,8 @@ for i in range(0,len(env)):
     for j in range(0, len(env[0])):
         rowlist.append(0)
     route_environ.append(rowlist)
-        
+
+
 #for loop to append environment and drunks
 for i in range(num_of_drunks):
     randomness = random.random()/3
@@ -151,28 +155,32 @@ for i in range(num_of_drunks):
                                        housenoList[i], pubDoor, 
                                        houseCoordsList[i], randomness))
 
-# set up figure size and axes
+#set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
 
 carry_on = True
 
-#container to append the town plan to the density map
-densityTP = []
+##container to append the town plan to the density map
+#densityTP = []
+#
+##create empty environment to append routes taken by drunks, later on in code
+#for i in range(300):
+#    rowlist = []
+#    for j in range(300):
+#        #rowlist.append(env[i][j]+route_environ[i][j])
+#                rowlist.append(route_environ[i][j])
+#    densityTP.append(rowlist)
 
-#create empty environment to append routes taken by drunks, later on in code
-for i in range(300):
-    rowlist = []
-    for j in range(300):
-        #rowlist.append(env[i][j]+route_environ[i][j])
-                rowlist.append(route_environ[i][j])
-    densityTP.append(rowlist)
-     
+###############################################################################
+########################'''Step 5: Create animation'''#########################
+###############################################################################
+    
 def update(frame_number):
     """
     Updates the display in the animation:
     Plot axes based on size of environment.
-    Drunks move....
+    Drunks move and stop once they are back home.
     """
     #clear previous display           
     fig.clear()
@@ -215,7 +223,7 @@ def update(frame_number):
 
 
 ###############################################################################
-######################'''Step 4: Stopping condition'''#########################
+######################'''Step 6: Stopping condition'''#########################
 ###############################################################################
        
 # generator function to set condition for when to stop 
@@ -230,7 +238,7 @@ def gen_function(b = [0]):
     print("Stopping condition has been met. All drunks are home!")
   
 ###############################################################################
-#########################'''Step 5: Run the model'''###########################
+#########################'''Step 7: Run the model'''###########################
 ############################################################################### 
 
 def run():
@@ -243,7 +251,7 @@ def run():
     canvas.draw()
 
 ###############################################################################
-#########################'''Step 6: GUI Interface'''###########################
+#########################'''Step 8: GUI Interface'''###########################
 ###############################################################################
 '''use tkinter to make GUI interface and widgets'''
 
@@ -263,7 +271,7 @@ model_menu.add_command(label="Close", command=root.destroy)
 tkinter.mainloop()
 
 ###############################################################################
-###################'''Step 6: Save density map to csv'''#######################
+###################'''Step 9: Save density map to csv'''#######################
 ###############################################################################
 
 #saves density data to current file directory as "density" text file
@@ -274,27 +282,18 @@ with open(csvfile, "w") as output:
     writer = csv.writer(output, lineterminator='\n')
     writer.writerows(route_environ)
 
-###############################################################################
-
+#set map inline
 shell = IPython.get_ipython()
 shell.enable_matplotlib(gui='inline')
 
 # set up figure size and axes
 fig = matplotlib.pyplot.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
+#display map
+plt.title('Density Map of Drunks')
 plt.imshow(route_environ)# plt.cm.get_cmap('binary'))
 plt.colorbar()
+#save as .png
 plt.savefig('density.png', bbox_inches = 'tight')
-
-#plt.imshow(densityTP, plt.cm.get_cmap('Set1'))
-#plt.savefig('densityTP.png')
-#Image.open('densityTP.png')
-
-#shell = IPython.get_ipython()
-#shell.enable_matplotlib(gui='automatic')
-#fig, ax = plt.subplots()
-#ax.imshow(densityTP, plt.cm.get_cmap('Blues'))
-#ax.grid()
-#plt.show()
 
 print("***Thank you for running the model***")
