@@ -158,6 +158,10 @@ for i in range(num_of_drunks):
                                        housenoList[i], pubDoor, 
                                        houseCoordsList[i], randomness))
 
+#set map inline
+shell = IPython.get_ipython()
+shell.enable_matplotlib(gui='inline')
+
 #set up figure size and axes
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_axes([0, 0, 1, 1])
