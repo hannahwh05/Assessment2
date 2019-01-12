@@ -16,7 +16,7 @@ For this model, town_plan.txt has been used for the environment. An alternative
 environment could be imported.
 
 This model is run from tkinter GUI. 
-When this code is run, a window will will appear on the computer screen called
+When this code is run, a window will appear on the computer screen called
 Drunk Model. To run the model, click "Run" from the "Menu" in this 
 window. When the model has met the "stopping condition", close the window and
 a density map showing the points where the drunks have passed through,

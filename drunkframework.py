@@ -28,8 +28,12 @@ class Drunk():
     Characteristics:
         - x-coordinate
         - y-coordinate
+        - The environment the drunks "stumbles" around in
+        - Awareness of other drunks
         - House number/home
-        - *****************
+        - Knowledge of where the pub door is
+        - Knowledge of where its house door is 
+        - An element of randomness to its movements
     """
     def __init__(self, env, route_environ, drunks, houseno, pubDoor, 
                  houseCoords, randomness, x=None, y=None):
@@ -118,7 +122,7 @@ class Drunk():
             self._y = moveDown
         #print(self.houseno, currDist) #test
         #Adds 100 to environment at every step
-        #n.b. y, x not x, y to be inline with reversed environment axes
+        #n.b. y, x not x, y to be consistent with reversed environment axes
         self.route_environ[self._y][self._x] += 100
         
     def back_home(self):
