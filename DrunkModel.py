@@ -21,7 +21,7 @@ Drunk Model. To run the model, click "Run" from the "Menu" in this
 window. When the model has met the "stopping condition", close the window and
 a density map showing the points where the drunks have passed through,
 will be printed to the console. A .txt file with the density points is also 
-saved to the current directory. 100 is added to every point the drunks pass 
+saved to the current directory. 1 is added to every point the drunks pass 
 through.
 '''
 
@@ -50,7 +50,7 @@ import math
 import random
 
 ###############################################################################
-####################'''Step 1: Assign value to variables'''####################
+#####################'''Step 1: Assign number of drunks'''#####################
 ###############################################################################
 
 num_of_drunks = 25

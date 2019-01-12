@@ -123,7 +123,7 @@ class Drunk():
         #print(self.houseno, currDist) #test
         #Adds 100 to environment at every step
         #n.b. y, x not x, y to be consistent with reversed environment axes
-        self.route_environ[self._y][self._x] += 100
+        self.route_environ[self._y][self._x] += 1
         
     def back_home(self):
         """
