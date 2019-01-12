@@ -271,13 +271,6 @@ tkinter.mainloop()
 ###################'''Step 9: Save density map to csv'''#######################
 ###############################################################################
 
-##set map inline
-#shell = IPython.get_ipython()
-#shell.enable_matplotlib(gui='inline')
-##plt.imshow(env, plt.cm.get_cmap('Blues'))
-##save as .png
-#plt.savefig('home.png', bbox_inches = 'tight')
-
 #saves density data to current file directory as "density" text file
 #n.b. this can be changed to .csv
 csvfile = os.path.dirname(os.path.abspath(__file__))+"\density.txt"
