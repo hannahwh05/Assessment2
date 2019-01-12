@@ -31,8 +31,8 @@ class Drunk():
         - House number/home
         - *****************
     """
-    def __init__(self, env, route_environ, drunks, houseno, pubDoor, houseCoords, 
-                 randomness, x=None, y=None):
+    def __init__(self, env, route_environ, drunks, houseno, pubDoor, 
+                 houseCoords, randomness, x=None, y=None):
         """
         Constructor takes arguments:
         env -- a list (environment) of lists (rowlists), imported from a csv 

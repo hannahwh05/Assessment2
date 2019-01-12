@@ -204,7 +204,7 @@ def update(frame_number):
         if drunks[i].home==False:
             drunks[i].stumble()
             drunks[i].back_home()
-        
+    
     #make plot based on size of environment 
     plt.xlim(0, len(env))
     #coordinates are reversed on y axis so environment is displayed as in 
@@ -219,8 +219,7 @@ def update(frame_number):
     
     #plot all the drunks
     for i in range(num_of_drunks):
-        plt.scatter(drunks[i]._x, drunks[i]._y)        
-
+        plt.scatter(drunks[i]._x, drunks[i]._y)
 
 ###############################################################################
 ######################'''Step 6: Stopping condition'''#########################
@@ -244,8 +243,6 @@ def gen_function(b = [0]):
 def run():
     """ Run model to animate plot for GUI interface"""
     global animation
-#    animation = ani.FuncAnimation(fig, update, repeat=False)
-#    canvas.draw()
     animation = ani.FuncAnimation(fig, update, 
                 frames=gen_function, repeat=False)
     canvas.draw()
@@ -273,6 +270,13 @@ tkinter.mainloop()
 ###############################################################################
 ###################'''Step 9: Save density map to csv'''#######################
 ###############################################################################
+
+##set map inline
+#shell = IPython.get_ipython()
+#shell.enable_matplotlib(gui='inline')
+##plt.imshow(env, plt.cm.get_cmap('Blues'))
+##save as .png
+#plt.savefig('home.png', bbox_inches = 'tight')
 
 #saves density data to current file directory as "density" text file
 #n.b. this can be changed to .csv
