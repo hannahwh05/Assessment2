@@ -31,13 +31,12 @@ For this model, town_plan.txt has been used for the environment (Figure 1). The 
 
 The simulation is run from tkinter GUI. When the code is run, a window will appear on the computer screen called Drunk Model. To run the model, click "Run" from the "Menu" in this window, as shown in Figure 2.
 
-![Run](hannahwh05.github.io/images/run.PNG "Figure 2: How to run the model")
+Figure 2: How to run the model: hannahwh05.github.io/images/run.PNG
       
-
 When the model has met the "stopping condition", where all the drunks have arrived home, as shown in Figure 3a, close the window and a density map showing the points where the drunks have passed through, will be printed to the console and saved as density.png to the current directory, shown in Figure 3b, along with density.txt file containing the density points. 1 is added to every point the drunks pass through. 
 
-![Home](hannahwh05.github.io/images/home.png "Figure 3a: End of Simulation")
-![Density](hannahwh05.github.io/images/density.png "Figure 3b: Density Map of Drunks")
+Figure 3a: End of Simulation: hannahwh05.github.io/images/home.png 
+Figure 3b: Density Map of Drunks: hannahwh05.github.io/images/density.png
       
 ## 3.	Program Description
 
@@ -90,6 +89,3 @@ Finally, the code could be further optimised to improve run time, for instance, 
 I am a current University of Leeds MSc GIS Student (2018-19) learning core skills in Python. I graduated from University of Southampton in 2016 with a 2:1 in BSc Geography. 
 
 Link to my website: https://hannahwh05.github.io/
-
-
-
