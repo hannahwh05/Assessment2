@@ -26,6 +26,9 @@ to inline.
 
 For this model, town_plan.txt has been used for the environment (Figure 1). The code allows for an alternative csv environment to be imported.
 
+!(hannahwh05.github.io/images/town_plan.png "Figure 1: Town Plan")
+      
+
 The simulation is run from tkinter GUI. When the code is run, a window will appear on the computer screen called Drunk Model. To run the model, click "Run" from the "Menu" in this window, as shown in Figure 2.
 
 When the model has met the "stopping condition", where all the drunks have arrived home, as shown in Figure 3a, close the window and a density map showing the points where the drunks have passed through, will be printed to the console and saved as density.png to the current directory, shown in Figure 3b, along with density.txt file containing the density points. 1 is added to every point the drunks pass through. 
@@ -49,3 +52,5 @@ Certain elements within the model and framework can be changed to suit the user:
   * The “randomness” variable on line 156 of the DrunkModel.py where, randomness = random.random()/3, giving a random number of uniform probability between 0 and 0.3 recurring. The higher the random number the more drunk the Drunk is, where 0 would lead the Drunk directly to their home. 
   * the “unitsMoveBy” variable, on line 88 of the drunkframework.py, where unitsMoveBy = random.randint(1,5), giving a random integer between 1 and 5. 
 * The names of the txt and png files can be changed in lines 283 and 301 respectively.
+
+
