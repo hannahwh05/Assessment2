@@ -85,7 +85,7 @@ f.close()
 #plt.colorbar()
 
 ###############################################################################
-################'''Step 3: Find coordinates in environment'''##################
+###############'''Step 3: Find coordinates from environment'''#################
 ###############################################################################
 '''set up containers'''
 
@@ -150,8 +150,7 @@ for i in range(0,len(env)):
         rowlist.append(0)
     route_environ.append(rowlist)
 
-
-#for loop to append environment and drunks
+#for loop to randomise drunk stumbles and append environment and drunks
 for i in range(num_of_drunks):
     randomness = random.random()/3
     drunks.append(drunkframework.Drunk(env, route_environ, drunks, 
@@ -168,6 +167,7 @@ ax = fig.add_axes([0, 0, 1, 1])
 
 carry_on = True
 
+#to be improved:
 ##container to append the town plan to the density map
 #densityTP = []
 #
