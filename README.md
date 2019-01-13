@@ -50,6 +50,7 @@ This program does the following:
 
 
 There are 25 drunks, each of which have homes assigned to them according to their number (creation number plus 10 (to match the house number). Houses are labelled 10-250 in increments of 10. The drunks randomly “stumble” left, right, up and down, back to their homes from the pub based on conditions met in a for loop. An element of bias is introduced to give the drunks some direction to their homes and prevent them from retracing their steps (though there is a small probability that they can to increase the randomness of their movements, as described below). For every point that the drunks stumble through on the map, 1 is added to the corresponding value in the density.txt file and therefore the density.png. When the drunk reaches their home, they stop stumbling. They print to the console their house number, door coordinates and announce, "Finally I'm back! Off to bed!". Once all the drunks have arrived back home, "Stopping condition has been met. All drunks are home!", is printed. At this point the animation window can be closed triggering the density data and map to be saved to the current directory. 
+
 Certain elements within the model and framework can be changed to suit the user:
 * The environment/town_plan – this is imported based on the numbers of rows and columns in the file. Provided the buildings are square, the coordsFinder function will locate the pub, houses and their doors based on the ID inputs. n.b. if the house numbers are not in the 100s, alter line 129 in DrunkModel.py as appropriate.
 * The number of drunks – consequently to the above point, the number of drunks can be changed to match the number of houses within the imported environment.
@@ -73,6 +74,10 @@ This version was working for a while during the simulation but then it would bre
 
 When updating Spyder to 3.3.2 I found that despite the backend being set to inline, an additional blank window, called Figure 1, was being created every time I ran the model. When matplotlib.pyplot is mentioned in the code it creates a popup window. To resolve this I have added the following lines to a couple of point in the code so that plots are printed to the console:
  
+ ```
+shell = IPython.get_ipython()
+shell.enable_matplotlib(gui='inline')
+```
 
 Due to time constraints and difficulties adjusting specific colours in the environment, I was unable to overlay the density map on top of the animation. 
 
