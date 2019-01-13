@@ -19,24 +19,24 @@ Files required to run the model:
 * Drunkframework.py – this contains the Drunk class and outlines the characteristics of the drunks,
 * town_plan.txt – This is a 300 by 300 raster file representing the town in which the drunks stumble about in. The pub is denoted by 1s, the houses by the numbers 10-250, in increments of 10, and everywhere else, zeros. 
 
-These files can be found on my GitHub: https://github.com/hannahwh05/Assessment2
+These files can be found on my GitHub: <https://github.com/hannahwh05/Assessment2>
 
 In Spyder set Tools > Preferences > Ipython console > Graphics > Set backend 
 to inline.
 
 For this model, town_plan.txt has been used for the environment (Figure 1). The code allows for an alternative csv environment to be imported.
 
-Figure 1: Town Plan: <hannahwh05.github.io/images/town_plan.png>
+Figure 1: Town Plan: <https://github.com/hannahwh05/hannahwh05.github.io/blob/master/images/town_plan.png>
       
 
 The simulation is run from tkinter GUI. When the code is run, a window will appear on the computer screen called Drunk Model. To run the model, click "Run" from the "Menu" in this window, as shown in Figure 2.
 
-Figure 2: How to run the model: <hannahwh05.github.io/images/run.PNG>
+Figure 2: How to run the model: <https://github.com/hannahwh05/hannahwh05.github.io/blob/master/images/run.PNG>
       
 When the model has met the "stopping condition", where all the drunks have arrived home, as shown in Figure 3a, close the window and a density map showing the points where the drunks have passed through, will be printed to the console and saved as density.png to the current directory, shown in Figure 3b, along with density.txt file containing the density points. 1 is added to every point the drunks pass through. 
 
-Figure 3a: End of Simulation: <hannahwh05.github.io/images/home.png>
-Figure 3b: Density Map of Drunks: <hannahwh05.github.io/images/density.png>
+Figure 3a: End of Simulation: <https://github.com/hannahwh05/hannahwh05.github.io/blob/master/images/home.png>
+Figure 3b: Density Map of Drunks: <https://github.com/hannahwh05/hannahwh05.github.io/blob/master/images/density.png>
       
 ## 3.	Program Description
 
@@ -61,7 +61,7 @@ Certain elements within the model and framework can be changed to suit the user:
 
 ## 4.	Development and Issues
 
-This program was developed using code from my Assessment 1 agent-based model (ABM) for this module. That model can be seen on my GitHub repository at: https://github.com/hannahwh05/GEOG5990M_Programming.
+This program was developed using code from my Assessment 1 agent-based model (ABM) for this module. That model can be seen on my GitHub repository at: <https://github.com/hannahwh05/GEOG5990M_Programming>.
 
 During development of the model, I aimed to make it as adaptable as possible so that a different environment could easily be imported and consequently the number of drunks could be changed. Frequently, this meant starting with a specific function suited to this project and then generalising from there.  
 
@@ -88,4 +88,4 @@ Finally, the code could be further optimised to improve run time, for instance, 
 
 I am a current University of Leeds MSc GIS Student (2018-19) learning core skills in Python. I graduated from University of Southampton in 2016 with a 2:1 in BSc Geography. 
 
-Link to my website: https://hannahwh05.github.io/
+Link to my website: <https://hannahwh05.github.io/>
